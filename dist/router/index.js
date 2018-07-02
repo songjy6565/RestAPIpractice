@@ -1,0 +1,1 @@
+"use strict";module.exports=function(e,r){var t=require("express").Router(),i=require("./articles")(e,r);return t.get("/",function(e,r){r.render("index.html",{})}),t.use("/api/v1/articles",i),t};
