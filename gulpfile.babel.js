@@ -13,7 +13,7 @@ import cache from 'gulp-file-cache';
 let Cache = new cache();
 let c = false;
 
-gulp.task('default',['clean','js','html','watch'], () => {
+gulp.task('default',['clean','js','html'/*,'watch'*/], () => {
 	return gulputil.log('Gulp is using');
 });
 

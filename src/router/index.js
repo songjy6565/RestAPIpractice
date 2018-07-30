@@ -1,12 +1,13 @@
-module.exports = function(app, db){
-	var express = require('express');
-	var router = express.Router();
-	var artiRoutes = require('./articles')(app, db);
+import express from 'express';
+import {artiRoutes} from './articles';
 
-	router.get('/',function(req,res){
+export function indexRoutes(db){
+	var router = express.Router();
+
+	router.get('/',(req,res)=>{
 		res.render('index.html',{});
 	});
 
-	router.use('/api/v1/articles', artiRoutes);
+	router.use('/api/v1/articles', artiRoutes(db));
 	return router;
 };

@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+import mysql from 'mysql';
 var connection = mysql.createConnection({
 	host:'localhost',
 	user:'root',
@@ -22,11 +22,11 @@ var connection = mysql.createConnection({
 	});
 });*/
 
-connection.connect(function(err){
+connection.connect((err) => {
 	if(err)console.log('err[1]');
 	else{
 		console.log('DB is connected.');
-		connection.query('SELECT * FROM article', function(err, result){
+		connection.query('SELECT * FROM article', (err, result) => {
 			if(err)console.log('err[2]');
 			else{
 				console.log(JSON.stringify({result}));
@@ -35,4 +35,4 @@ connection.connect(function(err){
 	}
 });
 
-module.exports=connection;
+export default connection;

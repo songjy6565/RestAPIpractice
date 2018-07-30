@@ -1,22 +1,25 @@
-var express = require('express');
+'use strict';
+import express from 'express';
+import bodyParser from 'body-parser';
+import db from './lib/db';
+
 var app = express();
-var bodyParser = require('body-parser');
-var db = require('./lib/db');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
-var server = app.listen(3500, function(){
+var server = app.listen(3500, () => {
 	console.log("sever created on port 3500");
 });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-var auth = require('./lib/middleware/basicauth')(app, db);
-var valid = require('./lib/middleware/validcheck')(app, db);
-var indexRoutes = require('./router/index')(app, db);
-app.use('/',indexRoutes);
+import {bAuth} from './lib/middleware/basicauth';
+import {vCheck} from './lib/middleware/validcheck';
+bAuth(app,db);
+vCheck(app,db);
 
-/**/
+import {indexRoutes} from './router/index';
+app.use('/',indexRoutes(db));

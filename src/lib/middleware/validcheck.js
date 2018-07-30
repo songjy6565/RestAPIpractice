@@ -1,5 +1,5 @@
-module.exports = function(app, db){
-	app.use('/', function(req, res, next){
+export function vCheck(app, db){
+	app.use('/', (req, res, next)=>{
                 if (req.method == 'PUT' || req.method == 'POST'){
                         var author = req.body.author;
                         var content = req.body.content;
